@@ -1,0 +1,22 @@
+{
+  "name": "easton",
+  "description": "",
+  "main": "client/app.js",
+  "authors": [
+    "Willy Ovalle <willyovalle16@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2",
+    "handlebars": "^4.0.5",
+    "bootswatch-dist": "3.3.6-darkly"
+  }
+}

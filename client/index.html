@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Easton</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="../bower_components/bootswatch-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="parentContainer"></div>
+    <script type="text/javascript">
+        window.$ = window.jQuery = require('../bower_components/jquery/dist/jquery.min.js')
+        window.router = require('./js/router.js')(window.jQuery)
+        window.fs = require('fs')
+    </script>
+    
+    <script src="../bower_components/bootswatch-dist/js/bootstrap.min.js"></script>
+    <script src="./js/index.js" type="text/javascript"></script>
+    <script src="./js/events.js" type="text/javascript"></script>
+    <script src="./js/settings.js" type="text/javascript"></script>
+</body>
+
+</html>

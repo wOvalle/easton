@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="jumbotron ">
+        <h1>Settings</h1>
+    </div>
+    <div id="settings-container">
+        <table class="table table-responsive">
+            <thead>
+                <td>Setting</td>
+                <td>Value</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>autoplay</td>
+                    <td>
+                        <input type="checkbox" name="autoplay"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Trigger Keyboard Events</td>
+                    <td>
+                        <input type="checkbox" name="keyboard-events"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Video #1</td>
+                    <td>
+                        <input type="file" name="video1" accept="video/*" /><span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Video #2</td>
+                    <td>
+                        <input type="file" name="video2" accept="video/*" /><span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Video #3</td>
+                    <td>
+                        <input type="file" name="video3" accept="video/*" /><span></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-success btn-save">Save</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    settings.initialize()
+</script>
