@@ -3,16 +3,19 @@ const player = (() => {
 
     //DOM cache
     const player = $('video').get(0)
-    let settings;
+    let settings
 
     const init = () => {
         settings = configuration.getAllSettings()
         player.src = settings['video1']
+
+        if(settings['autoplay'] === true)
+            player.play()
     }
 
     const changeVideo = (e, arg) => {
         player.src = settings[`video${arg}`]
-        player.play();
+        player.play()
     }
 
     const playPause = (e) => {
@@ -25,7 +28,6 @@ const player = (() => {
     //events
     eventsModule.addEventListener('change-video', changeVideo)
     $(player).on('click', playPause)
-
 
     init()
 })()
