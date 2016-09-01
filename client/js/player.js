@@ -1,37 +1,30 @@
-(() => {
-    const { remote } = require('electron')
-    const currentWindow = remote.getCurrentWindow()
-    
+const player = (() => {
+    const configuration = require('../configuration')
+
     //DOM cache
-    const $player = $('video')
-    const player = $player.get(0)
-    let videos;
+    const player = $('video').get(0)
+    let settings;
 
     const init = () => {
-        settings.get(setts => {
-            videos = setts.videos
-            player.src = setts.videos.video1
-        })
-
+        settings = configuration.getAllSettings()
+        player.src = settings['video1']
     }
 
     const changeVideo = (e, arg) => {
-        player.src = videos[`video${arg}`]
+        player.src = settings[`video${arg}`]
         player.play();
-        //currentWindow.height = player.height
-        //currentWindow.width = player.width
     }
 
     const playPause = (e) => {
         if (e.target.paused)
-            e.target.play();
+            e.target.play()
         else
-            e.target.pause();
+            e.target.pause()
     }
 
     //events
     eventsModule.addEventListener('change-video', changeVideo)
-    $player.on('click', playPause)
+    $(player).on('click', playPause)
 
 
     init()

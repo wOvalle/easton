@@ -1,5 +1,5 @@
 const settings = (() => {
-    var configuration = require('../configuration')
+    const configuration = require('../configuration')
 
     const eventHandler = (event) => {
         const type = event.target.type
@@ -42,8 +42,7 @@ const settings = (() => {
     }
 
     return {
-        init,
-        configuration
+        init
     }
 
 })()
