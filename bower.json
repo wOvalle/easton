@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "jquery": "2",
-    "handlebars": "^4.0.5",
     "bootswatch-dist": "3.3.6-darkly"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "easton",
-  "version": "0.0.1",
+  "version": "0.3.0",
   "main": "index.js",
   "scripts": {
     "start": "electron ."
@@ -8,5 +8,9 @@
   "devDependencies": {
     "electron-prebuilt": "^1.2.6",
     "electron-reload": "^1.0.2"
+  },
+  "dependencies": {
+    "johnny-five": "^0.10.0",
+    "messenger": "0.0.9"
   }
 }
