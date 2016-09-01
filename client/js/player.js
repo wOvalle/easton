@@ -29,5 +29,7 @@ const player = (() => {
     eventsModule.addEventListener('change-video', changeVideo)
     $(player).on('click', playPause)
 
+    eventsModule.send('window-player-open')
+
     init()
 })()

@@ -13,6 +13,9 @@ const eventsModule = (() => {
     return {
         addEventListener: (event, fn) => {
             ipcRenderer.on(event, fn)
+        },
+        send: (event, data) => {
+            ipcRenderer.send(event, data)
         }
     }
 })()
