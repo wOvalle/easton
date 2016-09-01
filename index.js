@@ -4,7 +4,7 @@ const messenger = require('messenger')
 const arduino = messenger.createListener(8000)
 let mainWindow = {}
 
-menu.applyCustomMenu()
+//menu.applyCustomMenu()
 
 if (process.mas) app.setName('Arduino Video Changer')
 
@@ -21,6 +21,8 @@ app.on('ready', function() {
 })
 
 ipcMain.on('change-video', (event, arg) => {
+    console.log('change-video', `video${arg}`)
+
     event.sender.send('change-video', arg)
 })
 

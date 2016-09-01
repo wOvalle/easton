@@ -7,26 +7,25 @@ const settings = (() => {
     const vid2 = $('input[name="video2"]')
     const vid3 = $('input[name="video3"]')
     const autoplay = $('input[name="autoplay"]')
-    const saveButton = $('.btn-save')
 
     const initialize = (opts) => {
         fetch(set => {
             autoplay.prop('checked', set.autoplay)
 
             $('input[type="file"').each(
-                (i, v) => $(v).closest('td').find('span').text(set.videos[v.name]) 
+                (i, v) => $(v).closest('td').find('span').text(set.videos[v.name])
             )
 
         })
     }
 
     const get = (cb) => {
-        if(settings) cb(settings)
+        if (settings) cb(settings)
         else fetch(cb)
     }
 
     const fetch = cb => {
-        fs.readFile(settings_file, function (err, data) {
+        fs.readFile(settings_file, function(err, data) {
             settings = $.parseJSON(data)
             cb(settings)
 
@@ -78,7 +77,8 @@ const settings = (() => {
         }
     }
 
-    saveButton.on('click', clickHandler)
+    //Events
+    $(document).on('click', '.btn-save', clickHandler)
 
     return {
         initialize,
@@ -87,4 +87,3 @@ const settings = (() => {
 })()
 
 window.settings = settings
-
