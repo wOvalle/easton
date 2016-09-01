@@ -3,9 +3,11 @@
   "version": "0.3.0",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron . --enable-logging",
+    "pack": "node_modules/.bin/electron-packager ./ easton --out=dist --platform=win32 --arch=ia32 --version=1.2.6 --version-string.CompanyName=WillyOvalle --version-string.ProductName=easton --version-string.FileDescription=\"Arduino player\" --overwrite"
   },
   "devDependencies": {
+    "electron-packager": "^7.7.0",
     "electron-prebuilt": "^1.2.6",
     "electron-reload": "^1.0.2"
   },
