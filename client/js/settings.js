@@ -1,89 +1,49 @@
 const settings = (() => {
-    const settings_file = './settings.json'
-    let settings;
+    var configuration = require('../configuration')
 
-    //DOM cache
-    const vid1 = $('input[name="video1"]')
-    const vid2 = $('input[name="video2"]')
-    const vid3 = $('input[name="video3"]')
-    const autoplay = $('input[name="autoplay"]')
+    const eventHandler = (event) => {
+        const type = event.target.type
+        const name = event.target.name
 
-    const initialize = (opts) => {
-        fetch(set => {
-            autoplay.prop('checked', set.autoplay)
+        console.log(`Event detected in ${type}-${name}: `, event)
 
-            $('input[type="file"').each(
-                (i, v) => $(v).closest('td').find('span').text(set.videos[v.name])
-            )
+        if (type === 'file') {
+            const filePath = event.target.files[0].path
+            configuration.setSetting(name, filePath)
+            $(`span[name=${name}]`).text(filePath)
 
-        })
-    }
+        } else if (type === 'checkbox') {
+            const checked = event.target.checked
 
-    const get = (cb) => {
-        if (settings) cb(settings)
-        else fetch(cb)
-    }
-
-    const fetch = cb => {
-        fs.readFile(settings_file, function(err, data) {
-            settings = $.parseJSON(data)
-            cb(settings)
-
-        })
-    }
-
-    const save = (set) => {
-        fs.writeFile(settings_file, JSON.stringify(set), function(err) {
-            if (err) {
-                alert("An error ocurred creating the file " + err.message)
-            }
-
-            alert("The file has been succesfully saved")
-        })
-    }
-
-    const clickHandler = () => {
-        const newSettings = parseSettings()
-
-        newSettings.videos =
-            newSettings.videos
-            .filter(v => v && v.files.length)
-            .map(v => {
-                return {
-                    path: v.files[0].path,
-                    name: v.name
-                }
-            })
-            .reduce((o, v) => { //converting from array to obj
-                o[v.name] = v.path
-                return o
-            }, {})
-
-        fetch(set => {
-            settings.autoplay = newSettings.autoplay
-            $.extend(settings.videos, newSettings.videos)
-            save(settings)
-        })
-    }
-
-    const parseSettings = () => {
-        return {
-            videos: [
-                vid1[0],
-                vid2[0],
-                vid3[0],
-            ],
-            autoplay: autoplay.prop('checked')
+            configuration.setSetting(name, checked)
         }
     }
 
-    //Events
-    $(document).on('click', '.btn-save', clickHandler)
+    const init = () => {
+        //bind events
+        $('input')
+            .each((i, f) => {
+                $(f).on('change', eventHandler)
+            })
+
+        //Set current state
+        const currentSettings = configuration.getAllSettings()
+        Object.keys(currentSettings).forEach(key => {
+            let e = $(`input[name=${key}`)[0]
+
+            if (e.type === 'checkbox')
+                e.checked = currentSettings[key]
+
+            if (e.type === 'file')
+                $(`span[name=${key}]`).text(currentSettings[key])
+
+        })
+
+    }
 
     return {
-        initialize,
-        get
+        init,
+        configuration
     }
-})()
 
-window.settings = settings
+})()

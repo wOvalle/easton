@@ -12,7 +12,9 @@
     "electron-reload": "^1.0.2"
   },
   "dependencies": {
+    "electron-config": "^0.2.1",
     "johnny-five": "^0.10.0",
-    "messenger": "0.0.9"
+    "messenger": "0.0.9",
+    "nconf": "^0.8.4"
   }
 }
