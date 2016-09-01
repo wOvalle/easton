@@ -4,7 +4,9 @@ client = messenger.createSpeaker(8000)
 
 let board, buttons
 
-board = new five.Board()
+board = new five.Board({
+    repl: false
+})
 
 const buttonsObj = {
     15: "A1",
