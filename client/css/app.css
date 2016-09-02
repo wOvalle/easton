@@ -3,6 +3,11 @@ video {
     height: auto;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     -webkit-app-region: drag
 }
@@ -12,7 +17,7 @@ a,
 video,
 table,
 .modal,
-.jumbotron-settings{
+.jumbotron-settings {
     -webkit-app-region: no-drag
 }
 
@@ -41,4 +46,18 @@ table,
 
 .back {
     margin-left: 10px;
+}
+
+.parentContainer {
+    min-height: 95%;
+}
+
+.footer {
+    height: 40px;
+    margin-top: -40px;
+    margin-left: 20px;
+}
+
+.circuit-status {
+    font-weight: bold;
 }

@@ -16,6 +16,10 @@
         <div class="info pull-right" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></div>
         <div class="back pull-left"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></div>
     </div>
+    <div class="parentContainer container-fluid"></div>
+    <footer class='footer'>
+        <div>Circuit Status: <span class='circuit-status'>DISCONNECTED</span></div>
+    </footer>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -30,7 +34,6 @@
             </div>
         </div>
     </div>
-    <div class="parentContainer container-fluid"></div>
     <script type="text/javascript">
     window.$ = window.jQuery = require('../bower_components/jquery/dist/jquery.min.js')
     window.router = require('./js/router.js')(window.jQuery)

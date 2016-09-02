@@ -1,8 +1,7 @@
 const five = require("johnny-five")
-const messenger = require('messenger')
-client = messenger.createSpeaker(8000)
-
-let board, buttons
+const client = require('messenger').createSpeaker(8000)
+const stopwatch = require('../stopwatch')
+let board, buttons, timer
 
 board = new five.Board({
     repl: false
@@ -20,18 +19,31 @@ const buttonsObj = {
 
 const getVideoId = (button) => button.split('')[1]
 
-board.on("ready", function() {
-    var buttons = new five.Buttons({
+const sendKeepAlive = () => client.request('keepalive')
+
+board.on("ready", () => {
+    buttons = new five.Buttons({
         pins: ['A1', 'A2', 'A3']
     })
 
-    buttons.on("press", function(event) {
+    client.request('board-ready', (data) => {
+        console.log('Event sent to frontend: ', data)
+    })
+
+    buttons.on("press", (event) => {
         const pressedButton = buttonsObj[event.pin]
         console.log("Pressed: ", pressedButton)
 
-        client.request('button-pressed', getVideoId(pressedButton), function(data) {
+        client.request('button-pressed', getVideoId(pressedButton), (data) => {
             console.log('Event sent to frontend: ', data)
         })
     })
 
+    if(timer) stopwatch.stop(timer)
+    timer = stopwatch.startInterval(1000, sendKeepAlive)
+})
+
+board.on('close', () => {
+    console.log('connection closed')
+    stopwatch.stopInterval(timer)
 })
