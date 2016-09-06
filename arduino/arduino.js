@@ -8,22 +8,22 @@ board = new five.Board({
 })
 
 const buttonsObj = {
-    15: "A1",
-    16: "A2",
-    17: "A3",
-    18: "A4",
-    19: "A5",
-    20: "A6",
-    21: "A7"
+    2: "1",
+    3: "2",
+    4: "3"
 }
 
-const getVideoId = (button) => button.split('')[1]
+const getVideoId = (pin) => {
+    const buttonPressed = buttonsObj[pin]
+    console.log('buttonPressed', buttonPressed)
+    return buttonPressed
+}
 
 const sendKeepAlive = () => client.request('keepalive')
 
 board.on("ready", () => {
     buttons = new five.Buttons({
-        pins: ['A1', 'A2', 'A3']
+        pins: [2, 3, 4]
     })
 
     client.request('board-ready', (data) => {
@@ -31,10 +31,9 @@ board.on("ready", () => {
     })
 
     buttons.on("press", (event) => {
-        const pressedButton = buttonsObj[event.pin]
-        console.log("Pressed: ", pressedButton)
+        console.log(`Pressed: ${event.pin}, Sent: video${getVideoId(event.pin)}`)
 
-        client.request('button-pressed', getVideoId(pressedButton), (data) => {
+        client.request('button-pressed', getVideoId(event.pin), (data) => {
             console.log('Event sent to frontend: ', data)
         })
     })
