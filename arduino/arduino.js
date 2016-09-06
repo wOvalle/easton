@@ -1,21 +1,27 @@
 const five = require("johnny-five")
 const client = require('messenger').createSpeaker(8000)
 const stopwatch = require('../stopwatch')
+const configuration = require('../configuration')
+
 let board, buttons, timer
 
 board = new five.Board({
     repl: false
 })
 
-const buttonsObj = {
-    2: "1",
-    3: "2",
-    4: "3"
+const getSavedButtons = () => {
+    const settings = configuration.getAllSettings()
+    const buttons = 
+        Object
+        .keys(settings)
+        .filter( k => k.includes('select'))
+        .map(k => settings[k])
+        return buttons.length === 3 ? buttons : ['2', '3', '4']
 }
 
 const getVideoId = (pin) => {
     const buttonPressed = buttonsObj[pin]
-    console.log('buttonPressed', buttonPressed)
+    console.log('buttonPressed: ', buttonPressed)
     return buttonPressed
 }
 
@@ -23,7 +29,7 @@ const sendKeepAlive = () => client.request('keepalive')
 
 board.on("ready", () => {
     buttons = new five.Buttons({
-        pins: [2, 3, 4]
+        pins: getSavedButtons()
     })
 
     client.request('board-ready', (data) => {

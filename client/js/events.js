@@ -14,12 +14,12 @@ const eventsModule = (() => {
 
     //Board Status Events
     ipcRenderer.on('board-ready', (data) => {
-        console.log('board-ready', data)
+        //console.log('board-ready', data)
         $('.circuit-status').text('CONNECTED')
     })
 
     ipcRenderer.on('board-disconnected', (data) => {
-        console.log('board-disconnected', data)
+        //console.log('board-disconnected', data)
         $('.circuit-status').text('DISCONNECTED')
     })
 

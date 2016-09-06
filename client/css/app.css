@@ -61,3 +61,7 @@ table,
 .circuit-status {
     font-weight: bold;
 }
+
+select.form-control {
+    width: 25%;
+}

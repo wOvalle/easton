@@ -3,18 +3,23 @@ const player = (() => {
 
     //DOM cache
     const player = $('video').get(0)
-    let settings
+    let settings,
+        currentVideo
 
     const init = () => {
         settings = configuration.getAllSettings()
-        player.src = settings['video1']
+        currentVideo = 'video4'
+        player.src = settings[currentVideo]
 
         if(settings['autoplay'] === true)
             player.play()
     }
 
     const changeVideo = (e, arg) => {
-        player.src = settings[`video${arg}`]
+        console.log('change-video', arg)
+        if(currentVideo !== 'video4' && arg !== '4') return;
+        currentVideo = `video${arg}`
+        player.src = settings[currentVideo]
         player.play()
     }
 
@@ -28,6 +33,11 @@ const player = (() => {
     //events
     eventsModule.addEventListener('change-video', changeVideo)
     $(player).on('click', playPause)
+
+    $(player).on('ended', () => {
+        console.log('ended, current video', currentVideo)
+        changeVideo(null, '4')
+    })
 
     eventsModule.send('window-player-open')
 
