@@ -64,7 +64,10 @@ table,
 }
 
 select.form-control {
-    width: 25%;
+    width: 10%;
+    display: inline;
+    height: 20px;
+    padding: 0 0 0 0;
 }
 
 .vertical-center {
