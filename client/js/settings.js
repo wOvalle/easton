@@ -1,7 +1,7 @@
 const settings = (() => {
     const configuration = require('../configuration')
 
-    const availablePorts = ['2', '3', '4', '5', '6', '7', '8', 'A1', 'A2', 'A3', 'A4', 'A5']
+    const availablePorts = ['1', '2', '3', '4', '5', '6', '7', '8', 'A1', 'A2', 'A3', 'A4', 'A5']
 
     const eventHandler = (event) => {
         const type = event.target.type
@@ -42,6 +42,8 @@ const settings = (() => {
 
         Object.keys(currentSettings).forEach(key => {
             let e = $(`input[name=${key}],select[name=${key}]`).get(0)
+
+            if(!e) return
 
             if (e.type === 'checkbox')
                 e.checked = currentSettings[key]

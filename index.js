@@ -26,19 +26,26 @@ ipcMain.on('window-minimize', () => {
     mainWindow.minimize()
 })
 
+ipcMain.on('window-maximize', (event, isMaximized) => {
+    console.log('window-maximize', isMaximized)
+    if(isMaximized)
+        mainWindow.unmaximize()
+    else
+        mainWindow.maximize()
+})
+
 ipcMain.on('window-close', () => {
     app.quit()
 })
 
-ipcMain.on('change-video', (event, arg) => {
-    console.log('change-video', `video${arg}`)
+ipcMain.on('button-pressed', (event, arg) => {
+    console.log('button-pressed', `video${arg}`)
 
-    event.sender.send('change-video', arg)
+    event.sender.send('button-pressed', arg)
 })
 
-ipcMain.on('open-external', (event, arg) => {
-    shell.openExternal(arg)
-})
+ipcMain.on('open-external', (event, arg) =>
+    shell.openExternal(arg))
 
 ipcMain.on('window-player-open', () => {
     console.log('fired!')
@@ -54,7 +61,7 @@ ipcMain.on('window-player-exit', (event, arg) => {
 arduino.on('button-pressed', (event, data) => {
     console.log('Received From Arduino: ', data)
     event.reply('success')
-    mainWindow.webContents.send('change-video', data)
+    mainWindow.webContents.send('button-pressed', data)
 })
 
 arduino.on('board-ready', (event, data) => {

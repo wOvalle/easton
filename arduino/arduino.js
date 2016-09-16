@@ -16,13 +16,14 @@ const getSavedButtons = () => {
         .keys(settings)
         .filter( k => k.includes('select'))
         .map(k => settings[k])
-        return buttons.length === 3 ? buttons : ['2', '3', '4']
+
+        console.log('configuration-buttons', buttons)
+        return buttons.length >= 3 ? buttons : ['2', '3', '4']
 }
 
 const getVideoId = (pin) => {
-    const buttonPressed = buttonsObj[pin]
-    console.log('buttonPressed: ', buttonPressed)
-    return buttonPressed
+    console.log('buttonPressed: ', pin)
+    return pin
 }
 
 const sendKeepAlive = () => client.request('keepalive')

@@ -8,8 +8,8 @@ const eventsModule = (() => {
 
         if (e.keyCode == 27)
             router.changeRoute('home.html')
-        else if (~['1', '2', '3'].indexOf(key) && configuration.getSetting('keyboard-events'))
-            ipcRenderer.send('change-video', key)
+        else if (~['1', '2', '3', '4', '5', '6', '7', '8'].indexOf(key) && configuration.getSetting('keyboard-events'))
+            ipcRenderer.send('button-pressed', key)
     })
 
     //Board Status Events
